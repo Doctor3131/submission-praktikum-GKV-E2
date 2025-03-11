@@ -86,7 +86,7 @@ int main(int argc, char* argv[]) {
     glutInit(&argc, argv);
     glutInitWindowSize(800, 800);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
-    glutCreateWindow("OpenGL Primitives");
+    glutCreateWindow("Tugas 2");
     glutDisplayFunc(RenderScene);
     glClearColor(0.25f, 0.15f, 0.10f, 1.0f);
     glutMainLoop();
