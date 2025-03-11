@@ -1,53 +1,81 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <math.h>
+#include <stdlib.h>
 
 #define PI 3.1415926535898
-#define circle_points 100
+#define CIRCLE_POINTS 100
 
 void RenderScene(void) {
     glClear(GL_COLOR_BUFFER_BIT);
 
+    // (GL_QUADS)
     glPushMatrix();
-    glLineWidth(2.0f);
-    glBegin(GL_LINES);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex3f(0.00, 0.20, 0.0);
-    glVertex3f(0.00, -0.20, 0.0);
+    glColor3f(0.8f, 0.5f, 0.3f); 
+    glBegin(GL_QUADS);
+    glVertex3f(-0.5f, -0.4f, 0.0f);
+    glVertex3f(-0.8f, -0.6f, 0.0f);
+    glVertex3f(0.8f, -0.6f, 0.0f);
+    glVertex3f(0.5f,-0.4f, 0.0f);
     glEnd();
     glPopMatrix();
 
+    // (GL_TRIANGLE_FAN)
     glPushMatrix();
-    glPointSize(5.0f);
-    glTranslatef(0.35, 0.35, 0.0);
-    glBegin(GL_POINTS);
-    glColor3f(1.0f, 1.0f, 1.0f);
-    glVertex3f(0.25, 0.25, 0.0);
-    glEnd();
-    glPopMatrix();
-
-    glPushMatrix();
-    glTranslatef(0.50, 0.50, 0.00);
-    glBegin(GL_TRIANGLE_STRIP);
-    glColor3f(1.0f, 0.0f, 0.0f);
-    glVertex3f(-0.05, -0.05, 0.00);
-    glColor3f(0.0f, 1.0f, 0.0f);
-    glVertex3f(0.15, -0.05, 0.00);
-    glColor3f(0.0f, 0.0f, 1.0f);
-    glVertex3f(-0.05, 0.05, 0.00);
-    glColor3f(1.0f, 1.0f, 0.0f);
-    glVertex3f(0.15, 0.05, 0.00);
-    glEnd();
-    glPopMatrix();
-
-    glPushMatrix();
-    glBegin(GL_LINE_LOOP);
-    int i;
-    float angle;
-    for (i = 0; i < circle_points; i++) {
-        angle = 2 * PI * i / circle_points;
-        glVertex3f(cos(angle), sin(angle), 0.0);
+    glColor3f(1.0f, 0.85f, 0.3f);
+    glBegin(GL_TRIANGLE_FAN);
+    glVertex3f(0.0f, 0.0f, 0.0f); // Titik pusat
+    for (int i = 0; i <= CIRCLE_POINTS; i++) {
+        float angle = 2 * PI * i / CIRCLE_POINTS;
+        glVertex3f(0.5 * cos(angle), 0.5 * sin(angle), 0.0);
     }
+    glEnd();
+    glPopMatrix();
+
+    // (GL_LINE_STRIP)
+    glPushMatrix();
+    glLineWidth(10.0f);
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glBegin(GL_LINE_STRIP);
+    glVertex3f(-0.4f, 0.4f, 0.0f);
+    glVertex3f(-0.3f, 0.4f, 0.0f);
+    glVertex3f(-0.2f, 0.3f, 0.0f);
+    glEnd();
+    glPopMatrix();
+
+    // (GL_LINE_LOOP)
+    glPushMatrix();
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glBegin(GL_LINE_LOOP);
+    for (int i = 0; i < CIRCLE_POINTS; i++) {
+        float angle = 2 * PI * i / CIRCLE_POINTS;
+        glVertex3f(0.5 * cos(angle), 0.5 * sin(angle), 0.0);
+    }
+    glEnd();
+    glPopMatrix();
+
+
+
+    // (GL_TRIANGLE_STRIP)
+    glPushMatrix();
+    glColor3f(0.3f, 0.5f, 0.2f);
+    glBegin(GL_TRIANGLE_STRIP);
+    glVertex3f(-0.3f, 0.4f, 0.0f);  
+    glVertex3f(-0.35f, 0.35f, 0.0f); 
+    glVertex3f(-0.3f, 0.35f, 0.0f); 
+    glVertex3f(-0.38f, 0.28f, 0.0f); 
+    glEnd();
+    glPopMatrix();
+
+
+    // (GL_QUAD_STRIP)
+    glPushMatrix();
+    glColor3f(0.6f, 0.3f, 0.1f); 
+    glBegin(GL_QUADS);
+    glVertex3f(-0.8f, -0.6f, 0.0f);  
+    glVertex3f(0.8f, -0.6f, 0.0f);  
+    glVertex3f(0.8f, -0.9f, 0.0f);  
+    glVertex3f(-0.8f, -0.9f, 0.0f);  
     glEnd();
     glPopMatrix();
 
@@ -56,11 +84,11 @@ void RenderScene(void) {
 
 int main(int argc, char* argv[]) {
     glutInit(&argc, argv);
-    glutInitWindowSize(640, 480);
+    glutInitWindowSize(800, 800);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
-    glutCreateWindow("Simple");
+    glutCreateWindow("OpenGL Primitives");
     glutDisplayFunc(RenderScene);
-    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+    glClearColor(0.25f, 0.15f, 0.10f, 1.0f);
     glutMainLoop();
     return 0;
 }
