@@ -1,0 +1,4 @@
+1. Selain membuat titik menggunakan GL_POINT, garis menggunakan GL_LINES,
+2. buatlah program yang memanfaatkan fungsi GL_LINE_STRIP, GL_LINE_LOOP,
+GL_TRIANGLE_FAN, GL_TRIANGLE_STRIP, GL_QUADS, dan GL_QUAD_STRIP.
+3. Buat Gambar Kubus bertingkat dari objek primitif sekreatif mungkin. (minimal 5 kubus)
