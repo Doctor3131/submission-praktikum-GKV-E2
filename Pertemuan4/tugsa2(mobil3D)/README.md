@@ -1,0 +1,1 @@
+Gunakan A, S, W, D, Q, E untuk movement
